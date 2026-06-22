@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Salary Calculator</title>
+  <link rel="stylesheet" href="manager.css" />
+  <link rel="stylesheet" href="salary.css" />
+</head>
+<body>
+  <header>
+    <h1>Salary Calculator</h1>
+    <button id="backBtn" style="margin-left:12px;padding:6px 10px;font-size:14px;cursor:pointer">← Back</button>
+  </header>
+  <main>
+    <section>
+      <h2>Employee Summary</h2>
+      <div id="summary">
+        <!-- Filled by salary.js -->
+      </div>
+    </section>
+
+    <!-- Two-column layout: left = calculator & result, right = saved payloads -->
+    <div class="two-column">
+      <div class="left card">
+        <h2>Calculate Salary</h2>
+        <form id="salaryForm">
+          <label>Employee ID:</label>
+          <input type="text" id="salaryEmpId" readonly />
+          <label>Name:</label>
+          <input type="text" id="salaryName" readonly />
+          <label>Department:</label>
+          <input type="text" id="salaryDept" readonly />
+          <label>Basic Salary:</label>
+          <input type="number" id="salaryBasic" />
+          <label>PF (%):</label>
+          <input type="number" id="salaryPF" value="12" min="0" step="0.01" />
+          <label>Month (YYYY-MM):</label>
+          <input type="month" id="salaryMonth" required />
+          <div style="margin-top:8px">
+            <button type="submit">Calculate Salary</button>
+            <button type="button" id="exportSalaryBtn" class="export-btn" style="margin-left:8px">Export Salary</button>
+          </div>
+        </form>
+        <div id="salaryResult" style="margin-top:12px"></div>
+      </div>
+
+      <aside class="right card saved-list">
+        <h3>Saved Salary Payloads</h3>
+        <div id="savedListContainer">
+          <!-- Populated by salary.js from localStorage 'salarySavedList' -->
+        </div>
+      </aside>
+    </div>
+  </main>
+  <script src="salary.js"></script>
+</body>
+</html>

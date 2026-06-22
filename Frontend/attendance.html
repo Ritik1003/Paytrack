@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Employee Attendance</title>
+    <link rel="stylesheet" href="attendance.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+    <div class="container">
+        <h1>Mark Attendance</h1>
+        <p id="currentDate" class="current-date"></p>
+    <p class="note">Office hours: <strong>08:00</strong> to <strong>18:00</strong>.</p>
+
+        <form id="attendanceForm" autocomplete="off" novalidate>
+            <div class="form-group">
+                <label for="empID">Employee ID</label>
+                <input type="text" id="empID" placeholder="Enter your Employee ID" required />
+            </div>
+
+            <div class="form-group">
+                <label for="empName">Employee Name</label>
+                <input type="text" id="empName" placeholder="Enter your Name" required />
+            </div>
+
+            <div class="form-group">
+                <label for="department">Department</label>
+                <select id="department" required>
+                    <option value="">Select Department</option>
+                    <option value="HR">HR</option>
+                    <option value="Finance">Finance</option>
+                    <option value="Engineering">Engineering</option>
+                    <option value="Sales">Sales</option>
+                    <option value="Marketing">Marketing</option>
+                    <option value="IT">IT</option>
+                    <option value="Support">Support</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="status">Attendance Status</label>
+                <select id="status">
+                    <option value="" selected>Select Status </option>
+                    <option value="Present">Present</option>
+                    <option value="Absent">Absent</option>
+                </select>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group time-group">
+                    <label for="startTime">Start Time </label>
+                    <input type="time" id="startTime" readonly />
+                </div>
+            </div>
+
+            
+
+            <button type="button" id="markBtn">Submit</button>
+            <button type="button" id="logoutBtn" style="margin-top:8px; background:#e74c3c;">Logout</button>
+        </form>
+
+        <p id="message" role="alert" aria-live="polite"></p>
+    </div>
+    <script src="attendance.js"></script>
+</body>
+</html>

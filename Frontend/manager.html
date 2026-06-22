@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manager Dashboard</title>
+  <link rel="stylesheet" href="manager.css" />
+  <link rel="stylesheet" href="salary.css" />
+</head>
+<body>
+  <header>
+    <h1>Manager Dashboard</h1>
+    <div style="display:flex;gap:8px;align-items:center;">
+      <button id="viewSalaryDataBtn" class="action-btn">View Salary Data</button>
+      <button id="exportBtn" class="action-btn">Export Employee Data</button>
+      <button id="resetAttendanceBtn">Reset Attendance</button>
+      <button id="resetAllDataBtn" style="background-color: #ff4444;">Reset Month Data</button>
+      <button id="logoutBtn">Logout</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- Overview cards -->
+    <section class="stats">
+      <div class="card"><h3>Present Today</h3><p id="presentCount">0</p></div>
+      <div class="card"><h3>Absent</h3><p id="absentCount">0</p></div>
+      <div class="card"><h3>On Leave</h3><p id="leaveCount">0</p></div>
+      <div class="card"><h3>Total Employees</h3><p id="totalCount">0</p></div>
+    </section>
+
+    <!-- Manager now shows only the Employee Details table below. The
+         per-employee attendance table has been removed; use the Emp ID
+         column to open the attendance modal when needed. -->
+
+    <!-- Edit Employee Details -->
+    <section class="layout">
+      <!-- Left side: attendance side panel (hidden by default) -->
+      <aside id="attendanceSidePanel" class="side-panel" aria-hidden="true">
+        <div class="side-panel-header">
+          <h3 id="sidePanelTitle">Attendance</h3>
+          <button id="closeSidePanel">&times;</button>
+        </div>
+        <div class="side-panel-body">
+          <p><strong>Employee:</strong> <span id="sideEmpName"></span> (<span id="sideEmpId"></span>)</p>
+          <table id="attendanceSideTable">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- filled dynamically -->
+            </tbody>
+          </table>
+          <div style="text-align:right;margin-top:8px;">
+            <button id="saveSideAttendance">Save Changes</button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right/main area: employee table -->
+      <section class="employee main-area">
+        <h2>Edit Employee Details</h2>
+        <table id="employeeTable">
+          <thead>
+            <tr>
+              <th>Emp ID</th>
+              <th>Name</th>
+              <th>Department</th>
+              <th>Basic Salary</th>
+              <th>PF (%)</th>
+              <th>Status</th>
+              <th>Edit</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Dynamic rows -->
+          </tbody>
+        </table>
+      </section>
+    </section>
+  </main>
+
+  <!-- Edit Modal -->
+  <div id="editModal" class="modal">
+    <div class="modal-content">
+      <span id="closeModal">&times;</span>
+      <h3>Update Employee Details</h3>
+      <form id="editForm">
+        <input type="hidden" id="empId" />
+        <label>Employee ID:</label>
+        <input type="text" id="empIdentifier" />
+        <label>Department:</label>
+        <select id="department" required>
+          <option value="">Select Department</option>
+          <option value="HR">HR</option>
+          <option value="Finance">Finance</option>
+          <option value="Engineering">Engineering</option>
+          <option value="Sales">Sales</option>
+          <option value="Marketing">Marketing</option>
+          <option value="IT">IT</option>
+          <option value="Support">Support</option>
+          </select>
+        
+        <label>Basic Salary:</label>
+        <input type="number" id="basicSalary" required />
+
+        <label>PF (%):</label>
+        <input type="number" id="pf" required />
+
+        <label>Status:</label>
+        <select id="status">
+          <option>Active</option>
+          <option>On Leave</option>
+          <option>Resigned</option>
+        </select>
+
+        <button type="submit">Save</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="deleteConfirmationModal" class="modal">
+    <div class="modal-content delete-confirmation">
+      <span id="closeDeleteModal">&times;</span>
+      <h3>Delete Employee</h3>
+      <p>Are you sure you want to delete this employee?</p>
+      <div class="employee-info">
+        <p><strong>Name:</strong> <span id="deleteEmpName"></span></p>
+        <p><strong>Employee ID:</strong> <span id="deleteEmpId"></span></p>
+        <p><strong>Department:</strong> <span id="deleteEmpDept"></span></p>
+      </div>
+      <div class="warning">
+        <p>⚠️ This action will permanently delete:</p>
+        <ul>
+          <li>Employee profile and personal information</li>
+          <li>All attendance records for this employee</li>
+          <li>All salary records and payment history</li>
+          <li>Associated tasks and performance data</li>
+        </ul>
+      </div>
+      <div class="confirmation-input">
+        <label>Type "delete" to confirm:</label>
+        <input type="text" id="deleteConfirmInput" placeholder="Type delete to confirm" />
+      </div>
+      <div class="modal-actions">
+  <button id="closeDeleteModalBtn" class="btn-secondary">Cancel</button>
+        <button id="confirmDeleteBtn" class="btn-danger" disabled>Delete Employee</button>
+      </div>
+    </div>
+  </div>
+
+      <!-- Month selection modal for deleting data by month -->
+      <div id="monthDeleteModal" class="modal">
+        <div class="modal-content">
+          <span id="closeMonthModal">&times;</span>
+          <h3>Delete Data for Month</h3>
+          <p>Select the month for which you want to delete attendance and salary records. This will only remove records for the chosen month.</p>
+          <label for="deleteMonthInput">Month (YYYY-MM):</label>
+          <input type="month" id="deleteMonthInput" />
+          <div style="margin-top:12px; text-align:right;">
+            <button id="cancelMonthDelete" class="btn-secondary">Cancel</button>
+            <button id="confirmMonthDelete" class="btn-danger">Delete Month Data</button>
+          </div>
+        </div>
+      </div>
+
+  <!-- Attendance Details Modal -->
+  <div id="attendanceModal" class="modal">
+    <div class="modal-content">
+      <span id="closeAttendanceModal">&times;</span>
+      <h3>Employee Attendance Details</h3>
+      <div class="attendance-details">
+        <p><strong>Employee:</strong> <span id="attendanceEmpName"></span> (<span id="attendanceEmpId"></span>)</p>
+        <table id="attendanceDetailTable">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Status</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Populated dynamically -->
+          </tbody>
+        </table>
+        <div style="text-align:right;margin-top:10px;">
+          <button id="saveAttendanceUpdates">Save Changes</button>
+          <button id="closeAttendanceBtn" class="btn-secondary">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Salary Data Modal -->
+  <div id="salaryDataModal" class="modal">
+    <div class="modal-content">
+      <span id="closeSalaryModal">&times;</span>
+      <h3>Saved Salary Payloads</h3>
+      <div id="salaryListContainer">
+        <table id="salaryListTable">
+          <thead>
+            <tr><th>Emp ID</th><th>Name</th><th>Department</th><th>Working</th><th>Non-working</th><th>Actions</th></tr>
+          </thead>
+          <tbody>
+            <!-- populated dynamically -->
+          </tbody>
+        </table>
+      </div>
+      <div style="text-align:right;margin-top:8px;">
+        <button id="sendAllToSalaryBtn">Open Salary Page</button>
+        <button id="closeSalaryBtn" class="btn-secondary">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="manager.js"></script>
+</body>
+</html>

@@ -1,0 +1,147 @@
+/* Reset and base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', Arial, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #71b7e6, #9b59b6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background-color: #ffffffdd;
+    padding: 40px 40px 50px;
+    border-radius: 16px;
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.12),
+        0 4px 8px rgba(0, 0, 0, 0.06);
+    max-width: 420px;
+    width: 100%;
+    text-align: center;
+    transition: box-shadow 0.3s ease;
+}
+
+.container:hover {
+    box-shadow:
+        0 12px 36px rgba(0, 0, 0, 0.18),
+        0 6px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 0.75em;
+    color: #2c3e50;
+    letter-spacing: 1px;
+}
+
+.current-date {
+    color: #34495e;
+    font-weight: 600;
+    margin-bottom: 0.25em; /* make date sit closer to the note */
+    font-size: 1.15rem;
+    user-select: none;
+}
+
+form {
+    text-align: left;
+}
+
+.form-group {
+    margin-bottom: 1.25em;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    color: #34495e;
+    margin-bottom: 0.35em;
+}
+
+input[type="text"],
+input[type="time"],
+select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1.5px solid #bdc3c7;
+    border-radius: 10px;
+    font-size: 1rem;
+    color: #2c3e50;
+    transition: border-color 0.3s ease;
+    outline-offset: 2px;
+}
+
+input[type="text"]:focus,
+input[type="time"]:focus,
+select:focus {
+    border-color: #6c5ce7;
+    box-shadow: 0 0 5px #6c5ce7a0;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+}
+
+.time-group {
+    flex: 1;
+}
+
+button {
+    width: 100%;
+    background-color: #6c5ce7;
+    color: white;
+    padding: 14px 0;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    margin-top: 5px;
+    transition: background-color 0.3s ease;
+    box-shadow: 0 4px 15px rgb(108 92 231 / 0.5);
+}
+
+button:hover,
+button:focus {
+    background-color: #5a4cca;
+    box-shadow: 0 6px 20px rgb(90 76 202 / 0.75);
+}
+
+#message {
+    margin-top: 20px;
+    font-weight: 600;
+    text-align: center;
+    min-height: 1.2em;
+    user-select: none;
+}
+
+#message[style*="red"] {
+    color: #e74c3c;
+}
+
+#message[style*="green"] {
+    color: #27ae60;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .form-row {
+        flex-direction: column;
+    }
+}
+
+.note {
+    margin: 0.25em 0 1.1em 0; /* small gap above, larger gap below */
+    font-size: 0.95rem;
+    color: #2c3e50;
+    text-align: left;
+}

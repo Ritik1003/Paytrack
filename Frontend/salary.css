@@ -1,0 +1,44 @@
+/* Basic salary page styles shared with manager */
+:root{
+  --accent:#2b7cff;
+  --muted:#666;
+  --bg:#fafafa;
+  --card:#fff;
+}
+body{
+  font-family:Segoe UI, Roboto, Arial, sans-serif;
+  margin:0;padding:0;background:var(--bg);color:#222;
+}
+header{background:linear-gradient(90deg,var(--accent),#0053a6);color:#fff;padding:16px 20px}
+header h1{margin:0;font-size:20px}
+main{padding:18px;max-width:1000px;margin:18px auto}
+.card{background:var(--card);padding:12px;border-radius:6px;box-shadow:0 1px 4px rgba(20,20,20,0.05);margin-bottom:12px}
+label{display:block;margin-top:8px;color:var(--muted);font-size:13px}
+input[type=text],input[type=number],input[type=month],select{width:100%;padding:8px;border:1px solid #ddd;border-radius:4px;margin-top:4px;box-sizing:border-box}
+button{background:var(--accent);color:#fff;border:none;padding:8px 12px;border-radius:4px;cursor:pointer}
+button.btn-secondary{background:#666}
+#summary p{margin:6px 0}
+.export-btn{float:right;background:#3aa44a}
+.saved-list{margin-top:12px}
+.saved-item{padding:8px;border:1px solid #eee;border-radius:4px;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center}
+.saved-item .meta{font-size:13px;color:var(--muted)}
+
+/* Result card styles */
+.result-card{background:linear-gradient(180deg,#fff,#f7fbff);padding:14px;border-radius:10px;border:1px solid rgba(43,124,255,0.12);box-shadow:0 8px 24px rgba(43,124,255,0.06);max-width:520px}
+.result-header{font-size:15px;margin-bottom:8px;color:#08386a;font-weight:700}
+.result-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed #eef6fb;font-size:14px}
+.result-row:last-child{border-bottom:none}
+.result-label{color:var(--muted)}
+.result-value{font-weight:600;color:#111}
+.result-amount{font-size:18px;color:#0b6b1e;font-weight:800;margin-top:8px;text-align:right}
+.small-muted{font-size:12px;color:#666;margin-top:8px}
+
+/* Two-column layout for calculator + saved list */
+.two-column{display:flex;gap:16px;align-items:flex-start}
+.two-column .left{flex:1;min-width:300px}
+.two-column .right{width:320px}
+
+@media (max-width:800px){
+  .two-column{flex-direction:column}
+  .two-column .right{width:100%}
+}

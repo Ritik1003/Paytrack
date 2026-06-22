@@ -1,0 +1,350 @@
+
+html, body {
+  height: 100%;
+  margin: 0;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #f6f8fb;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+header {
+  background: #004aad;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  position: sticky;
+  top: 0;
+  z-index: 100; /* keep header above everything */
+}
+
+header h1 {
+  font-size: 22px;
+  margin: 0;
+}
+
+header button {
+  background: #ff5f57;
+  color: #fff;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+/* Main */
+main {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+/* Overview cards */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 15px;
+  margin: 20px 0;
+}
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.card h3 {
+  margin: 5px 0;
+  color: #004aad;
+}
+
+/* Sections */
+.attendance, .employee {
+  margin: 40px 0; /* Increased space between sections */
+}
+
+/* Layout for side panel + main area */
+.layout {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+
+.side-panel {
+  width: 360px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  padding: 12px;
+  display: block; /* always visible to avoid layout shift when opened */
+  max-height: calc(100vh - 140px);
+  overflow: auto;
+  position: sticky;
+  top: calc(var(--header-height, 70px) + 10px);
+}
+
+.side-panel .side-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Hide close button so the side panel stays visible and the
+   employee table does not shift when a record is opened */
+.side-panel .side-panel-header button {
+  display: none;
+}
+
+.main-area {
+  flex: 1;
+}
+
+/* Employee details fix */
+.employee {
+  margin-top: 60px; /* Extra top margin to prevent overlap */
+}
+
+.employee table {
+  margin-top: 25px; /* Table separated from section header or info box */
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+th, td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+/* Sticky header only for attendance table (prevents employee table header overlapping its rows) */
+#attendanceTable th {
+  background: #004aad;
+  color: #fff;
+  position: sticky;
+  top: calc(var(--header-height, 70px) + 5px); /* small offset to avoid overlap with page header */
+  z-index: 10;
+}
+
+/* Make employee table header non-sticky to avoid covering its rows */
+#employeeTable th {
+  position: static;
+  background: #004aad;
+  color: #fff;
+}
+
+/* Hover */
+tr:hover {
+  background: #f2f6ff;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Buttons */
+.action-btn {
+  background: #2196F3 !important;
+}
+.action-btn:hover {
+  background: #1976D2 !important;
+}
+
+/* Modals */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 200; /* above everything else */
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  /* lighter backdrop so manager dashboard is still visible */
+  background-color: rgba(0,0,0,0.18);
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+.modal-content {
+  background: linear-gradient(180deg, #ffffff 0%, #fbfbff 100%);
+  margin: 6% auto;
+  padding: 20px 22px;
+  border-radius: 14px;
+  width: 760px;
+  max-width: calc(100% - 48px);
+  box-shadow: 0 10px 30px rgba(2,6,23,0.16);
+  transition: transform 180ms ease, opacity 180ms ease;
+  transform: translateY(6px);
+  opacity: 1;
+  /* Keep modal vertically within viewport and allow internal scrolling */
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+/* subtle entrance */
+@keyframes modalIn {
+  from { transform: translateY(12px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.modal.show .modal-content { animation: modalIn 220ms ease both; }
+
+.delete-confirmation {
+  width: 450px;
+  /* Slightly smaller max-height specifically for delete dialog and allow scrolling */
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+.delete-confirmation h3 {
+  color: #dc3545;
+  margin-bottom: 20px;
+}
+
+.employee-info {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 20px 0;
+}
+
+.warning {
+  color: #721c24;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+}
+
+.confirmation-input {
+  margin: 20px 0;
+}
+.confirmation-input input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 8px;
+  border-radius: 4px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btn-secondary {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-danger {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-danger:disabled {
+  background: #dc354580;
+  cursor: not-allowed;
+}
+
+/* Form */
+#closeModal {
+  float: right;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+form input, form select {
+  width: 100%;
+  margin: 8px 0;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+form button {
+  background: #004aad;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+form button:hover {
+  background: #003080;
+}
+
+/* Salary Data Modal specific styling */
+#salaryListTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+#salaryListTable th, #salaryListTable td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #eef2ff;
+}
+#salaryListTable thead th {
+  font-weight: 600;
+  color: #24324a;
+  background: linear-gradient(90deg, rgba(2,74,173,0.07), rgba(2,74,173,0.02));
+}
+#salaryListTable tbody tr:nth-child(even) { background: #fbfcff; }
+#salaryListTable tbody tr:hover { background: #f1f6ff; }
+
+.modal .btn {
+  display: inline-block;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+.modal .exportSalaryBtn, .modal .export-btn { background: #0b78e3; color: #fff; }
+.modal .openSalaryBtn { background: #22c55e; color: #fff; }
+.modal .deleteSalaryBtn { background: #ff6b6b; color: #fff; }
+.modal .exportSalaryBtn:hover, .modal .openSalaryBtn:hover, .modal .deleteSalaryBtn:hover { filter: brightness(0.95); }
+
+/* Responsive: smaller screens show modal full width */
+@media (max-width: 820px) {
+  .modal-content { width: calc(100% - 32px); margin: 10% 16px; }
+  .side-panel { display: none; }
+}
+
+/* Default header height variable (in case JS doesn’t set it) */
+:root {
+  --header-height: 70px;
+}

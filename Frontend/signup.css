@@ -1,0 +1,123 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: #f5f5f5;
+}
+
+
+.page-header {
+  text-align: center;
+  padding: 20px;
+  position: sticky; /* stays at the top of content */
+  top: 20px;
+}
+
+.page-header h1 {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #3f51b5;  /* your blue color */
+  margin-top: -52px;
+}
+.container {
+  display: flex;
+  width: 200vw;
+  height: 90.5vh;
+  max-width:800px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0px 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Left Side - Form */
+.form-section {
+  flex: 0.4;
+  background: linear-gradient(180deg, #fefefe, #f8f5ec);
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.form-section h2 {
+  margin-bottom: 15px;
+  font-size: 28px;
+  font-weight: 600;
+}
+
+.form-section p {
+  margin-bottom: 25px;
+  color: #666;
+}
+
+.input-box {
+  margin-bottom: 15px;
+}
+
+.input-box input {
+  width: 100%;
+  padding: 12px 15px;
+  border: none;
+  outline: none;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: inset 0px 2px 5px rgba(0,0,0,0.05);
+  font-size: 15px;
+}
+
+
+.btn {
+  width: 100%;
+  padding: 14px;
+  background: #f8d94e;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  background: #f1c72b; /* lighter yellow on hover to match original palette */
+}
+
+
+.form-section a {
+  color: #333;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+/* Right Side - Image Section */
+.image-section {
+  flex:0.8;
+  background: url('Attendance-management.jpg') no-repeat center center/cover;
+  position: relative;
+}
+
+/* Minimal strength meter styles (kept small and scoped to signup) */
+.strength { margin-top: 8px; }
+.strength .bar { position: relative; height: 8px; border-radius: 8px; background: rgba(0,0,0,0.04); overflow: hidden; }
+.strength .bar::after { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: var(--strength-width, 0%); background: var(--strength-color, #ff6b6b); transition: width 0.25s ease; }
+.strength .criteria { list-style: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 12px; padding: 8px 0 0; margin: 0; color: #666; font-size: 12px; }
+.strength .criteria li { position: relative; padding-left: 18px; }
+.strength .criteria li::before { content: ""; position: absolute; left: 0; top: 4px; width: 10px; height: 10px; border-radius: 50%; border: 1px solid rgba(240, 236, 236, 0.916); background: rgba(3, 0, 0, 0.6); }
+.strength .criteria li.met { color: #2e7d32; }
+.strength .criteria li.met::before { background: #2e7d32; border-color: #2e7d32; }
+
+/* Login CTA styling */
+.login-cta { margin-top: 12px; text-align: center; }
+.login-cta p { margin-bottom: 8px; color: #333; }
+.login-cta .btn { display: inline-block; width: auto; padding: 12px 24px; }
