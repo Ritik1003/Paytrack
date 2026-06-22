@@ -1,4 +1,4 @@
-## 📌 Overview
+ 📌 Overview
 
 **PayTrack** is a web-based Employee Attendance and Payroll Management System designed to automate attendance tracking, leave management, and salary calculation.
 The system eliminates manual record-keeping, reduces payroll errors, and provides a transparent platform for both employees and administrators.
@@ -154,24 +154,6 @@ nodemon server.js
    * Payroll reports
    * Salary slips
 
----
-
-## 📷 Screenshots
-
-### Login Page
-![Login Page](screenshots/login.png)
-
-### Employee Dashboard
-![Employee Dashboard](screenshots/dashboard.png)
-
-### Attendance Management
-![Attendance Management](screenshots/attendance.png)
-
-### Payroll Report
-![Payroll Report](screenshots/payroll.png)
-
-> Add your actual screenshots inside the `screenshots` folder and update file names if required.
----
 
 ## 🎯 Applications
 
@@ -195,12 +177,10 @@ nodemon server.js
 
 ---
 
-## 👨‍💻 Author
+👨‍💻 Author
 
-** Ritik **
+ Ritik 
 
 Bachelor of Technology
 Electronics & Computer Engineering
 J.C. Bose University of Science & Technology, YMCA, Faridabad
-
----
