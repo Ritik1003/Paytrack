@@ -86,13 +86,13 @@ try {
 } catch (e) {}
 
 app.get("/", (req, res) => {
-  // serve the frontend index if present, otherwise a simple string
-  const indexFile = path.join(frontendPath, "index.html");
-  try {
-    res.sendFile(indexFile);
-  } catch (e) {
-    res.send("Backend Running Successfully");
-  }
+  // serve the frontend signup if present, otherwise a simple string
+  const signupFile = path.join(frontendPath, "signup.html");
+  res.sendFile(signupFile, (err) => {
+    if (err) {
+      res.send("Backend Running Successfully");
+    }
+  });
 });
 
 const PORT = process.env.PORT || 5000;
